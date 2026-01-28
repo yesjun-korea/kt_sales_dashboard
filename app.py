@@ -23,138 +23,185 @@ st.set_page_config(
 )
 
 # ============================================
-# 커스텀 CSS - 모바일 최적화 (텍스트 크기 조정)
+# 커스텀 CSS - 반응형 디자인 (PC 크게, 모바일 작게)
 # ============================================
 st.markdown("""
 <style>
-    /* 배경 및 전역 폰트 */
+    /* ========== 공통 기본 스타일 ========== */
     .stApp {
         background-color: #f0f2f5;
         color: #333333;
         font-family: 'Inter', 'Segoe UI', sans-serif;
     }
     
-    /* 기본 카드 스타일 - 그림자 강화 */
     .custom-card {
         background-color: #ffffff;
-        padding: 15px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
         border: 1px solid #e0e0e0;
         height: 100%;
         position: relative;
     }
     
-    /* 영업 키포인트 강조 카드 */
     .keypoint-card {
         background-color: #ffffff;
-        padding: 15px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         border: 3px solid #f9d849;
         height: 100%;
     }
     
-    /* 헤더 박스 스타일 - 모바일 최적화 */
+    /* ========== PC 버전 (기본값, 768px 이상) ========== */
     .header-box {
         background-color: #ffffff;
         border: 1px solid #e0e0e0;
-        border-radius: 12px;
-        padding: 10px 15px;
-        margin-bottom: 10px;
+        border-radius: 16px;
+        padding: 15px 25px;
+        margin-bottom: 15px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 12px;
         font-weight: 700;
         color: #006666;
-        font-size: 1.1rem;
+        font-size: 1.8rem;
         width: 100%;
     }
     .header-box::before {
         content: '';
         display: inline-block;
-        width: 4px;
-        height: 18px;
+        width: 6px;
+        height: 28px;
         background-color: #f9d849;
-        border-radius: 2px;
+        border-radius: 3px;
     }
     
-    /* 헤더 스타일 (Main Title) */
     .h1-title {
-        font-size: 1.4rem !important;
+        font-size: 2rem !important;
         font-weight: 800;
         color: #004d4d !important;
-        margin-bottom: 15px;
-        display: flex; align-items: center; gap: 10px;
+        margin-bottom: 25px;
+        display: flex; align-items: center; gap: 15px;
         flex-wrap: wrap;
     }
     
-    /* 영업기회 뱃지 스타일 - 모바일 최적화 */
     .opportunity-badge {
         display: inline-block;
         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
         color: #fff;
-        padding: 4px 10px;
-        border-radius: 15px;
-        font-size: 0.75rem;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 1rem;
         font-weight: 700;
-        margin: 3px 3px 3px 0;
-        box-shadow: 0 2px 6px rgba(238,90,36,0.3);
+        margin: 5px 5px 5px 0;
+        box-shadow: 0 3px 10px rgba(238,90,36,0.4);
         text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
     
-    /* 사이드바 - 모바일 최적화 */
     [data-testid="stSidebar"] {
         background-color: #ffffff;
         border-right: 1px solid #eef0f2;
-        font-size: 1rem;
+        font-size: 1.4rem;
     }
-    [data-testid="stSidebar"] .stMarkdown h2 { color: #006666 !important; font-size: 1.1rem !important; }
-    [data-testid="stSidebar"] .stMarkdown h3 { font-size: 1rem !important; }
-    [data-testid="stSidebar"] label { font-size: 0.9rem !important; }
+    [data-testid="stSidebar"] .stMarkdown h2 { color: #006666 !important; font-size: 1.6rem !important; }
+    [data-testid="stSidebar"] .stMarkdown h3 { font-size: 1.4rem !important; }
+    [data-testid="stSidebar"] label { font-size: 1.2rem !important; }
     
-    /* 정보 텍스트 - 모바일 최적화 */
     .info-row {
         display: flex; justify-content: space-between; align-items: center;
-        padding: 8px 0;
+        padding: 12px 0;
         border-bottom: 1px dashed #e0e0e0;
     }
-    .info-label { color: #64748b; font-weight: 600; font-size: 0.9rem; }
-    .info-value { color: #1e293b; font-weight: 600; font-size: 0.95rem; }
-    .info-value.highlight { color: #008080 !important; font-weight: 800; font-size: 1.05rem; }
+    .info-label { color: #64748b; font-weight: 600; font-size: 1.4rem; }
+    .info-value { color: #1e293b; font-weight: 600; font-size: 1.5rem; }
+    .info-value.highlight { color: #008080 !important; font-weight: 800; font-size: 1.7rem; }
     
-    /* 키포인트 텍스트 - 모바일 최적화 */
     .keypoint-box {
         background-color: #fff9c4;
-        border-radius: 8px; padding: 10px; 
+        border-radius: 12px; padding: 15px; 
     }
-    .keypoint-text { color: #333; font-size: 1rem; line-height: 1.5; font-weight: 500; }
+    .keypoint-text { color: #333; font-size: 1.5rem; line-height: 1.6; font-weight: 500; }
     
-    /* 직원 프로필 */
     .no-photo {
-        width: 80px; height: 80px; border-radius: 50%;
+        width: 120px; height: 120px; border-radius: 50%;
         background-color: #e2e8f0; color: #94a3b8;
         display: flex; align-items: center; justify-content: center;
-        font-size: 2rem; border: 2px solid #cbd5e1;
+        font-size: 3rem; border: 3px solid #cbd5e1;
     }
     
-    /* 상품 리스트 스타일 - 모바일 최적화 */
     .product-item {
         display: flex; justify-content: space-between; align-items: center;
-        padding: 8px 0; border-bottom: 1px solid #f0f0f0;
+        padding: 12px 0; border-bottom: 1px solid #f0f0f0;
     }
-    .product-name { font-weight: 600; color: #333; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
-    .product-count { font-weight: 700; color: #008080; background: #e0f2f1; padding: 3px 8px; border-radius: 8px; font-size: 0.85rem; }
+    .product-name { font-weight: 600; color: #333; display: flex; align-items: center; gap: 10px; font-size: 1.4rem; }
+    .product-count { font-weight: 700; color: #008080; background: #e0f2f1; padding: 4px 12px; border-radius: 12px; font-size: 1.3rem; }
     
-    /* 차트 소제목 - 모바일 최적화 */
     .chart-subtitle {
         text-align: center;
-        font-size: 1rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: #006666;
-        margin-bottom: 10px;
-        padding: 8px 0;
+        margin-bottom: 15px;
+        padding: 10px 0;
+    }
+    
+    /* ========== 모바일 버전 (768px 미만) ========== */
+    @media (max-width: 768px) {
+        .header-box {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            gap: 8px;
+            border-radius: 12px;
+        }
+        .header-box::before {
+            width: 4px;
+            height: 16px;
+        }
+        
+        .h1-title {
+            font-size: 1.2rem !important;
+            margin-bottom: 15px;
+            gap: 8px;
+        }
+        
+        .opportunity-badge {
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            margin: 2px;
+            border-radius: 15px;
+        }
+        
+        [data-testid="stSidebar"] { font-size: 0.9rem; }
+        [data-testid="stSidebar"] .stMarkdown h2 { font-size: 1rem !important; }
+        [data-testid="stSidebar"] .stMarkdown h3 { font-size: 0.9rem !important; }
+        [data-testid="stSidebar"] label { font-size: 0.8rem !important; }
+        
+        .info-row { padding: 8px 0; }
+        .info-label { font-size: 0.85rem; }
+        .info-value { font-size: 0.9rem; }
+        .info-value.highlight { font-size: 1rem; }
+        
+        .keypoint-box { padding: 10px; border-radius: 8px; }
+        .keypoint-text { font-size: 0.9rem; line-height: 1.5; }
+        
+        .no-photo {
+            width: 70px; height: 70px;
+            font-size: 1.8rem;
+        }
+        
+        .product-item { padding: 8px 0; }
+        .product-name { font-size: 0.9rem; gap: 6px; }
+        .product-count { font-size: 0.8rem; padding: 3px 8px; }
+        
+        .chart-subtitle { font-size: 0.95rem; margin-bottom: 8px; }
+        
+        .custom-card, .keypoint-card {
+            padding: 12px;
+            border-radius: 12px;
+        }
     }
     
 </style>
