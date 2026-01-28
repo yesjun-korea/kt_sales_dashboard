@@ -23,7 +23,7 @@ st.set_page_config(
 )
 
 # ============================================
-# 커스텀 CSS - 텍스트 크기 2배 확대
+# 커스텀 CSS - 모바일 최적화 (텍스트 크기 조정)
 # ============================================
 st.markdown("""
 <style>
@@ -37,9 +37,9 @@ st.markdown("""
     /* 기본 카드 스타일 - 그림자 강화 */
     .custom-card {
         background-color: #ffffff;
-        padding: 20px;
-        border-radius: 16px;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         border: 1px solid #e0e0e0;
         height: 100%;
         position: relative;
@@ -48,113 +48,113 @@ st.markdown("""
     /* 영업 키포인트 강조 카드 */
     .keypoint-card {
         background-color: #ffffff;
-        padding: 20px;
-        border-radius: 16px;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.12);
         border: 3px solid #f9d849;
         height: 100%;
     }
     
-    /* 헤더 박스 스타일 - 텍스트 2배 */
+    /* 헤더 박스 스타일 - 모바일 최적화 */
     .header-box {
         background-color: #ffffff;
         border: 1px solid #e0e0e0;
-        border-radius: 16px;
-        padding: 15px 25px;
-        margin-bottom: 15px;
+        border-radius: 12px;
+        padding: 10px 15px;
+        margin-bottom: 10px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 8px;
         font-weight: 700;
         color: #006666;
-        font-size: 2.1rem;
+        font-size: 1.1rem;
         width: 100%;
     }
     .header-box::before {
         content: '';
         display: inline-block;
-        width: 6px;
-        height: 28px;
+        width: 4px;
+        height: 18px;
         background-color: #f9d849;
-        border-radius: 3px;
+        border-radius: 2px;
     }
     
-    /* 헤더 스타일 (Main Title) - 유지 */
+    /* 헤더 스타일 (Main Title) */
     .h1-title {
-        font-size: 2.2rem !important;
+        font-size: 1.4rem !important;
         font-weight: 800;
         color: #004d4d !important;
-        margin-bottom: 25px;
-        display: flex; align-items: center; gap: 15px;
+        margin-bottom: 15px;
+        display: flex; align-items: center; gap: 10px;
         flex-wrap: wrap;
     }
     
-    /* [수정] 영업기회 뱃지 스타일 - 더 눈에 띄게 */
+    /* 영업기회 뱃지 스타일 - 모바일 최적화 */
     .opportunity-badge {
         display: inline-block;
         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
         color: #fff;
-        padding: 8px 16px;
-        border-radius: 25px;
-        font-size: 1.2rem;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.75rem;
         font-weight: 700;
-        margin: 5px 5px 5px 0;
-        box-shadow: 0 3px 10px rgba(238,90,36,0.4);
+        margin: 3px 3px 3px 0;
+        box-shadow: 0 2px 6px rgba(238,90,36,0.3);
         text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
     
-    /* 사이드바 - 텍스트 2배 */
+    /* 사이드바 - 모바일 최적화 */
     [data-testid="stSidebar"] {
         background-color: #ffffff;
         border-right: 1px solid #eef0f2;
-        font-size: 1.8rem;
+        font-size: 1rem;
     }
-    [data-testid="stSidebar"] .stMarkdown h2 { color: #006666 !important; font-size: 2rem !important; }
-    [data-testid="stSidebar"] .stMarkdown h3 { font-size: 1.8rem !important; }
-    [data-testid="stSidebar"] label { font-size: 1.6rem !important; }
+    [data-testid="stSidebar"] .stMarkdown h2 { color: #006666 !important; font-size: 1.1rem !important; }
+    [data-testid="stSidebar"] .stMarkdown h3 { font-size: 1rem !important; }
+    [data-testid="stSidebar"] label { font-size: 0.9rem !important; }
     
-    /* 정보 텍스트 - 2배 */
+    /* 정보 텍스트 - 모바일 최적화 */
     .info-row {
         display: flex; justify-content: space-between; align-items: center;
-        padding: 12px 0;
+        padding: 8px 0;
         border-bottom: 1px dashed #e0e0e0;
     }
-    .info-label { color: #64748b; font-weight: 600; font-size: 1.8rem; }
-    .info-value { color: #1e293b; font-weight: 600; font-size: 1.9rem; }
-    .info-value.highlight { color: #008080 !important; font-weight: 800; font-size: 2.1rem; }
+    .info-label { color: #64748b; font-weight: 600; font-size: 0.9rem; }
+    .info-value { color: #1e293b; font-weight: 600; font-size: 0.95rem; }
+    .info-value.highlight { color: #008080 !important; font-weight: 800; font-size: 1.05rem; }
     
-    /* 키포인트 텍스트 - 2배 */
+    /* 키포인트 텍스트 - 모바일 최적화 */
     .keypoint-box {
         background-color: #fff9c4;
-        border-radius: 12px; padding: 15px; 
+        border-radius: 8px; padding: 10px; 
     }
-    .keypoint-text { color: #333; font-size: 2rem; line-height: 1.6; font-weight: 500; }
+    .keypoint-text { color: #333; font-size: 1rem; line-height: 1.5; font-weight: 500; }
     
     /* 직원 프로필 */
     .no-photo {
-        width: 120px; height: 120px; border-radius: 50%;
+        width: 80px; height: 80px; border-radius: 50%;
         background-color: #e2e8f0; color: #94a3b8;
         display: flex; align-items: center; justify-content: center;
-        font-size: 3rem; border: 3px solid #cbd5e1;
+        font-size: 2rem; border: 2px solid #cbd5e1;
     }
     
-    /* 상품 리스트 스타일 - 2배 */
+    /* 상품 리스트 스타일 - 모바일 최적화 */
     .product-item {
         display: flex; justify-content: space-between; align-items: center;
-        padding: 12px 0; border-bottom: 1px solid #f0f0f0;
+        padding: 8px 0; border-bottom: 1px solid #f0f0f0;
     }
-    .product-name { font-weight: 600; color: #333; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; }
-    .product-count { font-weight: 700; color: #008080; background: #e0f2f1; padding: 4px 12px; border-radius: 12px; font-size: 1.7rem; }
+    .product-name { font-weight: 600; color: #333; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
+    .product-count { font-weight: 700; color: #008080; background: #e0f2f1; padding: 3px 8px; border-radius: 8px; font-size: 0.85rem; }
     
-    /* 차트 소제목 - 2배 */
+    /* 차트 소제목 - 모바일 최적화 */
     .chart-subtitle {
         text-align: center;
-        font-size: 1.9rem;
+        font-size: 1rem;
         font-weight: 700;
         color: #006666;
-        margin-bottom: 15px;
-        padding: 10px 0;
+        margin-bottom: 10px;
+        padding: 8px 0;
     }
     
 </style>
@@ -467,9 +467,9 @@ else:
             fig_line.update_layout(
                 plot_bgcolor='white', paper_bgcolor='white',
                 yaxis=dict(tickmode='array', tickvals=ticks, ticktext=[format_kr(v) for v in ticks], gridcolor='#f0f0f0', tickfont=dict(size=14)),
-                xaxis=dict(showgrid=False, tickfont=dict(size=14)),
-                legend=dict(orientation="h", y=1.1, x=1, xanchor='right', font=dict(size=16)),
-                margin=dict(t=30, b=20, l=20, r=20), height=350
+                xaxis=dict(showgrid=False, tickfont=dict(size=10)),
+                legend=dict(orientation="h", y=1.1, x=1, xanchor='right', font=dict(size=11)),
+                margin=dict(t=25, b=15, l=15, r=15), height=280
             )
             st.plotly_chart(fig_line, use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
@@ -484,10 +484,10 @@ else:
     COLORS_TEAL = ['#008080', '#26a69a', '#80cbc4', '#b2dfdb', '#e0f2f1']
     COLORS_GOLD = ['#f9d849', '#fbc02d', '#fff176', '#fff9c4', '#fffde7']
     
-    CHART_MARGIN = dict(t=80, b=80, l=80, r=80) 
+    CHART_MARGIN = dict(t=50, b=50, l=50, r=50) 
     
     with c1:
-        st.markdown('<div class="header-box" style="justify-content:center; font-size:1.9rem; margin-bottom:10px;">전체 상품 비중</div>', unsafe_allow_html=True)
+        st.markdown('<div class="header-box" style="justify-content:center; font-size:1rem; margin-bottom:8px;">전체 상품 비중</div>', unsafe_allow_html=True)
         
         p_labels = [str(c_data[pc]) for pc, rc in TOTAL_PROD_REVENUE if pd.notna(c_data[pc]) and c_data[rc] > 0]
         p_values = [c_data[rc] for pc, rc in TOTAL_PROD_REVENUE if pd.notna(c_data[pc]) and c_data[rc] > 0]
@@ -495,11 +495,11 @@ else:
             p_labels.append("기타")
             p_values.append(c_data[COL_REV_ANNUAL] - sum(p_values))
         fig1 = go.Figure(data=[go.Pie(labels=p_labels, values=p_values, hole=0.5, marker=dict(colors=COLORS_TEAL), textinfo='label+percent', textposition='outside', texttemplate='%{label}<br>%{percent:.1%}')])
-        fig1.update_layout(showlegend=False, margin=CHART_MARGIN, height=500, font=dict(size=16))
+        fig1.update_layout(showlegend=False, margin=CHART_MARGIN, height=350, font=dict(size=11))
         st.plotly_chart(fig1, use_container_width=True)
         
     with c2:
-        st.markdown('<div class="header-box" style="justify-content:center; font-size:1.9rem; margin-bottom:10px;">신규 매출 기여도</div>', unsafe_allow_html=True)
+        st.markdown('<div class="header-box" style="justify-content:center; font-size:1rem; margin-bottom:8px;">신규 매출 기여도</div>', unsafe_allow_html=True)
         new_rev = c_data[COL_NEW_ANNUAL]
         if new_rev > 0:
             pct = (new_rev/c_data[COL_REV_ANNUAL])*100
@@ -517,19 +517,19 @@ else:
                 direction='clockwise',  # 시계 방향
                 rotation=90  # 12시 방향에서 시작
             )])
-            fig2.add_annotation(text=f"{pct:.1f}%", x=0.5, y=0.5, font=dict(size=36, color='#f9d849', family="Arial Black"), showarrow=False)
-            fig2.update_layout(showlegend=False, margin=CHART_MARGIN, height=500, font=dict(size=16))
+            fig2.add_annotation(text=f"{pct:.1f}%", x=0.5, y=0.5, font=dict(size=24, color='#f9d849', family="Arial Black"), showarrow=False)
+            fig2.update_layout(showlegend=False, margin=CHART_MARGIN, height=350, font=dict(size=11))
             st.plotly_chart(fig2, use_container_width=True)
         else: st.info("신규 매출 없음")
             
     with c3:
-        st.markdown('<div class="header-box" style="justify-content:center; font-size:1.9rem; margin-bottom:10px;">신규 상품 비중</div>', unsafe_allow_html=True)
+        st.markdown('<div class="header-box" style="justify-content:center; font-size:1rem; margin-bottom:8px;">신규 상품 비중</div>', unsafe_allow_html=True)
         if new_rev > 0:
             n_labels = [str(c_data[pc]) for pc, rc in NEW_PROD_REVENUE if pd.notna(c_data[pc]) and c_data[rc] > 0]
             n_values = [c_data[rc] for pc, rc in NEW_PROD_REVENUE if pd.notna(c_data[pc]) and c_data[rc] > 0]
             fig3 = go.Figure(data=[go.Pie(labels=n_labels, values=n_values, hole=0.5, marker=dict(colors=COLORS_GOLD), textinfo='label+percent', textposition='outside', texttemplate='%{label}<br>%{percent:.1%}')])
-            fig3.update_layout(showlegend=False, margin=CHART_MARGIN, height=500, font=dict(size=16))
+            fig3.update_layout(showlegend=False, margin=CHART_MARGIN, height=350, font=dict(size=11))
             st.plotly_chart(fig3, use_container_width=True)
         else: st.info("신규 상품 없음")
 
-st.markdown('<div style="text-align:center; color:#aaa; margin-top:50px; font-size:1.4rem;">Copyright 2025 KT Enterprise Sales Guide</div>', unsafe_allow_html=True)
+st.markdown('<div style="text-align:center; color:#aaa; margin-top:30px; font-size:0.8rem;">Copyright 2025 KT Enterprise Sales Guide</div>', unsafe_allow_html=True)
