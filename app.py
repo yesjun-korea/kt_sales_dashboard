@@ -240,26 +240,17 @@ def load_data():
 
 @st.cache_data
 def load_staff_photos():
-    """Face.xlsx 파일에서 직원 사진 로드"""
+    """폴더 내 jpg 파일에서 직원 사진 로드 (파일명 = 직원이름.jpg)"""
+    mapping = {}
     try:
-        wb = openpyxl.load_workbook('Face.xlsx')
-        sheet_name = 'Sheet2' if 'Sheet2' in wb.sheetnames else wb.sheetnames[0]
-        ws = wb[sheet_name]
-        
-        mapping = {}
-        row_to_name = {}
-        for i, row in enumerate(ws.iter_rows(values_only=True), start=0): 
-            if len(row) > 3:
-                name_val = str(row[3]).strip().replace(' ', '')
-                if name_val and name_val != 'None':
-                    row_to_name[i] = name_val
-                    
-        for img in ws._images:
-            r_idx = img.anchor._from.row
-            if r_idx in row_to_name:
-                n_key = row_to_name[r_idx]
-                mapping[n_key] = img._data()
-                
+        # 현재 디렉토리에서 jpg 파일 검색
+        photo_dir = os.path.dirname(os.path.abspath(__file__))
+        for filename in os.listdir(photo_dir):
+            if filename.lower().endswith('.jpg'):
+                # 파일명에서 확장자 제거하여 직원 이름 추출
+                name = os.path.splitext(filename)[0].strip().replace(' ', '')
+                photo_path = os.path.join(photo_dir, filename)
+                mapping[name] = photo_path
         return mapping
     except:
         return {}
