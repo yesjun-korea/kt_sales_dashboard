@@ -15,6 +15,8 @@ st.set_page_config(
 # 사이드바 숨기기 및 스타일
 st.markdown("""
 <style>
+    /* 궁서체 사용 */
+    
     /* 사이드바 완전히 숨기기 */
     [data-testid="stSidebar"] {
         display: none;
@@ -23,10 +25,32 @@ st.markdown("""
         display: none;
     }
     
-    /* 전체 배경 */
+    /* Streamlit 기본 컨테이너 배경 투명하게 */
     .stApp {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
         min-height: 100vh;
+    }
+    
+    /* 모든 Streamlit 컨테이너 투명하게 */
+    .stMarkdown, .element-container, .stMarkdownContainer,
+    [data-testid="stMarkdownContainer"],
+    [data-testid="stVerticalBlock"],
+    [data-testid="stHorizontalBlock"],
+    .block-container, .main .block-container,
+    div[data-testid="stAppViewBlockContainer"] {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+    
+    /* main block-container 패딩 조정 */
+    .main .block-container {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+    
+    /* 코드 블록이나 pre 태그 숨기기 */
+    pre, code {
+        display: none !important;
     }
     
     /* 메인 컨테이너 */
@@ -35,14 +59,15 @@ st.markdown("""
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 80vh;
+        min-height: 85vh;
         padding: 40px 20px;
+        background: transparent !important;
     }
     
     /* 아이콘 애니메이션 */
     .security-icon {
-        font-size: 120px;
-        margin-bottom: 40px;
+        font-size: 150px;
+        margin-bottom: 50px;
         animation: pulse 2s ease-in-out infinite;
     }
     
@@ -51,60 +76,45 @@ st.markdown("""
         50% { transform: scale(1.1); opacity: 0.8; }
     }
     
-    /* 메인 타이틀 */
+    /* 메인 타이틀 - 조선로동당 스타일 */
     .main-title {
-        font-size: 4.5rem;
-        font-weight: 900;
-        color: #ffffff;
+        font-family: 'Gungsuh', '궁서', '궁서체', serif !important;
+        font-size: 8rem !important;
+        font-weight: 900 !important;
+        color: #ffffff !important;
         text-align: center;
-        margin-bottom: 20px;
-        text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        letter-spacing: 8px;
+        margin-bottom: 30px;
+        text-shadow: 0 6px 30px rgba(0,0,0,0.5);
+        letter-spacing: 15px;
+        line-height: 1.2;
+        background: transparent !important;
     }
     
     /* 서브 타이틀 */
     .sub-title {
-        font-size: 2rem;
-        font-weight: 600;
-        color: #f9d849;
+        font-size: 1.8rem !important;
+        font-weight: 600 !important;
+        color: #f9d849 !important;
         text-align: center;
-        margin-bottom: 60px;
-        letter-spacing: 2px;
-    }
-    
-    /* 안내 박스 */
-    .info-box {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 40px 60px;
-        max-width: 700px;
-        margin: 0 auto;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-    
-    .info-text {
-        font-size: 1.4rem;
-        color: #e0e0e0;
-        text-align: center;
-        line-height: 2;
+        margin-bottom: 40px;
+        letter-spacing: 3px;
+        background: transparent !important;
     }
     
     /* 로딩 바 애니메이션 */
     .loading-container {
-        width: 300px;
+        width: 400px;
         height: 6px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.2) !important;
         border-radius: 3px;
-        margin: 40px auto;
+        margin: 50px auto;
         overflow: hidden;
     }
     
     .loading-bar {
         width: 40%;
         height: 100%;
-        background: linear-gradient(90deg, #f9d849, #ff6b6b, #f9d849);
+        background: linear-gradient(90deg, #f9d849, #ff6b6b, #f9d849) !important;
         border-radius: 3px;
         animation: loading 2s ease-in-out infinite;
     }
@@ -121,28 +131,25 @@ st.markdown("""
         left: 0;
         right: 0;
         text-align: center;
-        color: rgba(255,255,255,0.5);
+        color: rgba(255,255,255,0.5) !important;
         font-size: 0.9rem;
+        background: transparent !important;
     }
     
     /* 모바일 대응 */
     @media (max-width: 768px) {
         .main-title {
-            font-size: 2.5rem;
-            letter-spacing: 4px;
+            font-size: 3.5rem !important;
+            letter-spacing: 8px;
         }
         .sub-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem !important;
         }
         .security-icon {
-            font-size: 80px;
+            font-size: 100px;
         }
-        .info-box {
-            padding: 25px 30px;
-            margin: 0 15px;
-        }
-        .info-text {
-            font-size: 1.1rem;
+        .loading-container {
+            width: 250px;
         }
     }
 </style>
@@ -152,20 +159,11 @@ st.markdown("""
 st.markdown("""
 <div class="main-container">
     <div class="security-icon">🔒</div>
-    <h1 class="main-title">보안성 검토 중</h1>
-    <p class="sub-title">Security Review in Progress</p>
+    <div class="main-title">보안성 검토 중</div>
+    <div class="sub-title">Security Review in Progress</div>
     
     <div class="loading-container">
         <div class="loading-bar"></div>
-    </div>
-    
-    <div class="info-box">
-        <p class="info-text">
-            현재 서비스 보안성 검토가 진행 중입니다.<br>
-            더 안전한 서비스 제공을 위해 잠시 서비스를 중단하오니<br>
-            이용에 불편을 드려 죄송합니다.<br><br>
-            <strong style="color: #f9d849;">빠른 시일 내에 다시 찾아뵙겠습니다.</strong>
-        </p>
     </div>
 </div>
 
